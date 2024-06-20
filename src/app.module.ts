@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TasksModule } from './tasks/tasks.module';
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 @Module({
@@ -11,16 +10,3 @@ import { NestFactory } from '@nestjs/core';
   ],
 })
 export class AppModule {}
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  // Enable global validation pipe
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,  // Automatically transform incoming data to DTO objects
-    whitelist: true,  // Strip out non-whitelisted properties from DTOs
-    forbidNonWhitelisted: true,  // Throw an error if non-whitelisted properties are present
-  }));
-  
-  await app.listen(3000);
-}
-bootstrap();
-

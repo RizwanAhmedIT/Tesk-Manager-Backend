@@ -1,6 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Patch, Post } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+
+let i =0 ;
+
 
 @Controller('tasks')
 export class TasksController {
@@ -12,7 +15,9 @@ export class TasksController {
     }
 
     @Get()
+
     findall(){
+        Logger.log(" API hite "+i++);
         return this.tasksService.findall();
     }
 
